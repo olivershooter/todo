@@ -7,15 +7,29 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-node_modules
-dist
-dist-ssr
+# Node.js/React
+node_modules/
+dist/
+dist-ssr/
+.tanstack/
 *.local
 
-# Editor directories and files
+# Python
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+.python/
+venv/
+env/
+*.egg-info/
+
+# Editors
 .vscode/*
 !.vscode/extensions.json
 .idea
+
+# OS generated
 .DS_Store
 *.suo
 *.ntvs*
@@ -23,7 +37,6 @@ dist-ssr
 *.sln
 *.sw?
 
-.tanstack
-venv/
-
+# Environment
 .env
+.env.local
