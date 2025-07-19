@@ -33,7 +33,13 @@ DEBUG = False
 if not DEBUG:
     SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 
-ALLOWED_HOSTS = ["localhost", "127.0.0.1", "*.olivershooter.com", "olivershooter.com"]
+ALLOWED_HOSTS = [
+    "localhost",
+    "127.0.0.1",
+    "*.olivershooter.com",
+    "olivershooter.com",
+    "backend",
+]
 
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": (
@@ -151,4 +157,4 @@ STATIC_URL = "static/"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 CORS_ALLOW_ALL_ORIGINS = True
-CORS_ALLOWS_CREDENTIALS = True
+CORS_ALLOW_CREDENTIALS = True
