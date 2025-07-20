@@ -2,6 +2,8 @@
 
 A full-stack todo application showcasing modern web development technologies for portfolio purposes.
 
+**Live Demo:** [https://todo.olivershooter.com](https://todo.olivershooter.com)
+
 ## Technology Stack
 
 ### Frontend
