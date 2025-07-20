@@ -23,6 +23,8 @@ __pycache__
 venv/
 env/
 *.egg-info/
+*.pyc
+db.sqlite3
 
 # Editors
 .vscode/*
