@@ -19,8 +19,6 @@ function RouteComponent() {
   const [totalNotes, setTotalNotes] = useState(0);
   const [lastNoteDate, setLastNoteDate] = useState("");
   const [registrationDate, setRegistrationDate] = useState("");
-
-  console.log("registrationDate: ", registrationDate);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
