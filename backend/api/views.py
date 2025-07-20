@@ -38,3 +38,12 @@ class CreateUserView(generics.CreateAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
     permission_classes = [AllowAny]
+
+
+class UserStatsView(generics.RetrieveAPIView):  # Changed inheritance
+    serializer_class = UserSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_object(self):  # type: ignore
+        # Return the current authenticated user
+        return self.request.user
