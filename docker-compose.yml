@@ -1,5 +1,5 @@
 services:
-  frontend:
+  frontend-todo:
     build: ./frontend
     ports:
       - "5175:80"
@@ -8,7 +8,7 @@ services:
     networks:
       - app-network
 
-  backend:
+  backend-todo:
     build: ./backend
     ports:
       - "9223:8000"
