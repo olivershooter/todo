@@ -1,9 +1,14 @@
 // tailwind.config.js
-// eslint-disable-next-line no-undef
+const defaultTheme = require("tailwindcss/defaultTheme");
+
 module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
     extend: {
+      fontFamily: {
+        sans: ["Poppins", ...defaultTheme.fontFamily.sans],
+        mono: ["Victor Mono", ...defaultTheme.fontFamily.mono],
+      },
       colors: {
         // Primary (Vibrant Teal)
         electric: {

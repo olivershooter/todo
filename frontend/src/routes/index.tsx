@@ -80,7 +80,6 @@ function Index() {
         </div>
       </div>
 
-      {/* Notes Creation Form */}
       <div className="card bg-base-100 shadow-xl mb-8">
         <div className="card-body">
           <h2 className="card-title flex items-center mb-4">

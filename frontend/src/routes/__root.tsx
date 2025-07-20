@@ -44,7 +44,7 @@ function RootComponent() {
 
   return (
     <>
-      <div className="navbar bg-base-100 shadow-md rounded-box mb-4">
+      <div className="navbar bg-base-100 shadow-md rounded-box mb-4 font-bold">
         <div className="flex-1">
           <Link to="/" className="btn btn-ghost text-xl">
             <img src={logo} width={40} height={40} />
@@ -65,10 +65,15 @@ function RootComponent() {
               </Link>
             </li>
 
-            {/* Authentication-conditional links */}
+            <li>
+              <Link to="/about" className="[&.active]:text-primary">
+                About
+              </Link>
+            </li>
+
             {isAuthenticated ? (
               <li>
-                <button onClick={logout} className="btn btn-primary">
+                <button onClick={logout} className="btn btn-primary ml-8">
                   Logout
                 </button>
               </li>
@@ -90,13 +95,15 @@ function RootComponent() {
         </div>
       </div>
 
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto px-4 font-mono">
         <Outlet />
       </div>
 
-      <div className="mt-8 mb-8 text-center text-sm text-base-content/70">
-        Made by Ollie 🤖
-      </div>
+      <footer>
+        <div className="mt-8 mb-8 text-center text-sm text-base-content/70">
+          Made by Ollie 🤖
+        </div>
+      </footer>
 
       <TanStackRouterDevtools />
       <Toaster
