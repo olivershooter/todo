@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
-import { ACCESS_TOKEN } from "../constants";
+import { ACCESS_TOKEN } from "../constants/api";
 
 interface AuthContextType {
   isAuthenticated: boolean;

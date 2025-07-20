@@ -1,7 +1,6 @@
 import { jwtDecode } from "jwt-decode";
-import api from "../api";
-import { REFRESH_TOKEN, ACCESS_TOKEN } from "../constants";
-import { redirect } from "@tanstack/react-router";
+import { REFRESH_TOKEN, ACCESS_TOKEN } from "../constants/api";
+import api from "../api/api";
 
 export const checkAuth = async () => {
   const token = localStorage.getItem(ACCESS_TOKEN);

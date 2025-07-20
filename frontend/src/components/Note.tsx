@@ -1,6 +1,4 @@
-import React, { useState } from "react";
 import { MdDelete } from "react-icons/md";
-import api from "../api";
 import { NoteProp } from "../types/notes";
 
 export const Note = ({

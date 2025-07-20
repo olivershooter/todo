@@ -1,11 +1,13 @@
 import { createFileRoute, redirect } from "@tanstack/react-router";
 import { checkAuth } from "../utils/auth";
-import { useState, useEffect, use } from "react";
+import { useState, useEffect } from "react";
 import { MdEditNote } from "react-icons/md";
-import api from "../api";
+
 import { Note } from "../components/Note";
 import { NoteProp } from "../types/notes";
 import { LoadingIndicator } from "../components/LoadingIndicator";
+import api from "../api/api";
+import toast from "react-hot-toast";
 
 export const Route = createFileRoute("/")({
   beforeLoad: async () => {
@@ -30,31 +32,29 @@ function Index() {
   const getNotes = () => {
     setLoading(true);
     api
-      .get("/api/notes/")
-      .then((res) => res.data)
-      .then((data) => {
-        setNotes(data);
-        console.log("These are the notes: ", data);
-      })
-      .catch((error) => alert(error));
-    setLoading(false);
+      .get("/api/notes/", { suppressToast: true })
+      .then((res) => setNotes(res.data))
+      .catch(() => toast.error("Failed to load notes"))
+      .finally(() => setLoading(false));
   };
 
-  const createNote = (e) => {
+  const createNote = (e: React.FormEvent) => {
     e.preventDefault();
     setIsCreatingNote(true);
     setLoading(true);
-    api
-      .post("/api/notes/", { content, title })
-      .then((res) => {
-        if (res.status === 201) alert("Note created");
-        else alert("Failed to make note");
-        getNotes();
-      })
-      .catch((error) => alert(error));
 
-    setIsCreatingNote(false);
-    setLoading(false);
+    api
+      .post(
+        "/api/notes/",
+        { content, title },
+        { successMessage: "Created a note!" },
+      )
+      .then(() => getNotes())
+      .catch(() => toast.error("Failed to make note"))
+      .finally(() => {
+        setIsCreatingNote(false);
+        setLoading(false);
+      });
   };
 
   const deleteNote = (id: number) => {
@@ -62,12 +62,13 @@ function Index() {
     api
       .delete(`/api/notes/delete/${id}/`)
       .then((res) => {
-        if (res.status === 204) alert("Note deleted");
-        else alert("Failed to delete the note");
+        if (res.status === 204) {
+          toast.success("Note deleted successfully!");
+        }
         getNotes();
       })
-      .catch((error) => alert(error));
-    setLoading(false);
+      .catch(() => toast.error("Failed to delete note"))
+      .finally(() => setLoading(false));
   };
 
   return (
@@ -117,12 +118,12 @@ function Index() {
               >
                 {!isCreatingNote && "Create Note"}
               </button>
-
-              {loading && <LoadingIndicator />}
             </div>
           </form>
         </div>
       </div>
+
+      {loading && <LoadingIndicator />}
 
       {notes.length === 0 ? (
         <div className="text-center py-12">
