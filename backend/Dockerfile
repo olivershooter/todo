@@ -3,8 +3,7 @@ FROM python:3.11-slim
 
 # Set environment variables
 ENV PYTHONUNBUFFERED=1 \
-    PYTHONDONTWRITEBYTECODE=1 \
-    DJANGO_ENV=production
+    PYTHONDONTWRITEBYTECODE=1
 
 # Install system dependencies
 RUN apt-get update && apt-get install -y --no-install-recommends \
@@ -21,9 +20,6 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy project files
 COPY . .
-
-# Collect static files
-RUN python manage.py collectstatic --noinput
 
 # Make entrypoint executable
 RUN chmod +x entrypoint.sh
