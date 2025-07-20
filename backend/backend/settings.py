@@ -38,7 +38,8 @@ ALLOWED_HOSTS = [
     "127.0.0.1",
     "*.olivershooter.com",
     "olivershooter.com",
-    "backend",
+    "backend-todo",
+    "frontend-todo",
 ]
 
 REST_FRAMEWORK = {
