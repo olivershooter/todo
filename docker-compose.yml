@@ -1,7 +1,6 @@
 version: 1
 services:
   django-backend:
-    image: ${DOCKER_REGISTRY}/django-backend:${VERSION}
     build:
       context: ./backend
       dockerfile: Dockerfile
@@ -16,7 +15,6 @@ services:
       - DB_PORT=${DB_PORT}
 
   vite-frontend:
-    image: ${DOCKER_REGISTRY}/vite-frontend:${VERSION}
     build:
       context: ./frontend
       dockerfile: Dockerfile
