@@ -1,11 +1,11 @@
 version: 1
 services:
-  django-backend:
+  django-todo-backend:
     build:
       context: ./backend
       dockerfile: Dockerfile
     ports:
-      - 8000:8000
+      - 21871:8000
     environment:
       - SECRET_KEY=${DJANGO_SECRET_KEY}
       - DB_NAME=${DB_NAME}
@@ -14,11 +14,11 @@ services:
       - DB_HOST=${DB_HOST}
       - DB_PORT=${DB_PORT}
 
-  vite-frontend:
+  vite-todo-frontend:
     build:
       context: ./frontend
       dockerfile: Dockerfile
     ports:
-      - 80:80
+      - 5175:80
     depends_on:
-      - django-backend
+      - django-todo-backend
