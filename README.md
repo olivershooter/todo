@@ -4,6 +4,8 @@ A full-stack todo application showcasing modern web development technologies for
 
 **Live Demo:** [https://todo.olivershooter.com](https://todo.olivershooter.com)
 
+Disclaimer: Register with any details you like, I recommend not using any real details (such as commonly used passwords). I'm not responsible for any notes you make.
+
 ## Technology Stack
 
 ### Frontend
