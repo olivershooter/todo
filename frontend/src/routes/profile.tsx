@@ -29,10 +29,9 @@ function RouteComponent() {
 
   const fetchUserStats = () => {
     setLoading(true);
-    const result = api
+    api
       .get("/api/user/stats/", { suppressToast: true })
       .then((res) => {
-        console.log("data: ", res.data);
         setUsername(res.data.username);
         setTotalNotes(res.data.total_notes);
         setLastNoteDate(
