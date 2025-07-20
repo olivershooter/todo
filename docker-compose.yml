@@ -20,5 +20,3 @@ services:
       dockerfile: Dockerfile
     ports:
       - 5175:80
-    depends_on:
-      - django-todo-backend
