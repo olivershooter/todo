@@ -1,7 +1,0 @@
-#!/bin/bash
-
-# Apply database migrations
-python manage.py migrate
-
-# Start Gunicorn server with correct module path
-exec gunicorn backend.wsgi:application --bind 0.0.0.0:8000
