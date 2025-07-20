@@ -30,12 +30,13 @@ function RouteComponent() {
     api
       .get("/api/user/stats/", { suppressToast: true })
       .then((res) => {
+        console.log("con", res);
         setUsername(res.data.username);
         setTotalNotes(res.data.total_notes);
         setLastNoteDate(
           res.data.last_note_date
-            ? new Date(res.data.last_note_date).toLocaleDateString()
-            : "",
+            ? res.data.last_note_date
+            : "No notes made :(",
         );
         setRegistrationDate(res.data.registration_date);
       })
