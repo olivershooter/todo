@@ -6,16 +6,26 @@ import {
 } from "@tanstack/react-router";
 import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
 import { useAuth } from "../context/AuthContext";
+import logo from "../assets/logo.png";
+import toast, { Toaster } from "react-hot-toast";
 
 export const Route = createRootRoute({
   component: RootComponent,
   notFoundComponent: () => {
     return (
-      <div className="p-4">
-        <p>Not found!</p>
-        <Link to="/" className="link link-primary mt-2">
-          Go home
-        </Link>
+      <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-base-100 to-base-200 p-4">
+        <div className="text-center">
+          <div className="text-9xl mb-4">😢</div>
+          <h1 className="text-4xl font-bold text-base-content mb-2">
+            404 - Page Not Found
+          </h1>
+          <p className="text-lg text-base-content mb-8">
+            Oops! The page you're looking for doesn't exist.
+          </p>
+          <Link to="/" className="btn btn-primary">
+            Go Back Home
+          </Link>
+        </div>
       </div>
     );
   },
@@ -27,6 +37,7 @@ function RootComponent() {
 
   const logout = () => {
     localStorage.clear();
+    toast.success("Logged out.");
     setAuthenticated(false);
     navigate({ to: "/login" });
   };
@@ -36,7 +47,7 @@ function RootComponent() {
       <div className="navbar bg-base-100 shadow-md rounded-box mb-4">
         <div className="flex-1">
           <Link to="/" className="btn btn-ghost text-xl">
-            App Logo
+            <img src={logo} width={40} height={40} />
           </Link>
         </div>
 
@@ -83,11 +94,21 @@ function RootComponent() {
         <Outlet />
       </div>
 
-      <div className="mt-8 text-center text-sm text-base-content/70">
-        © 2023 My App
+      <div className="mt-8 mb-8 text-center text-sm text-base-content/70">
+        Made by Ollie 🤖
       </div>
 
       <TanStackRouterDevtools />
+      <Toaster
+        position="top-right"
+        toastOptions={{
+          duration: 4000,
+          style: {
+            background: "#363636",
+            color: "#fff",
+          },
+        }}
+      />
     </>
   );
 }
