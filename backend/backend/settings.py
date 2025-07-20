@@ -33,14 +33,12 @@ DEBUG = False
 if not DEBUG:
     SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 
-ALLOWED_HOSTS = [
-    "localhost",
-    "127.0.0.1",
-    "*.olivershooter.com",
-    "olivershooter.com",
-    "backend-todo",
-    "frontend-todo",
-]
+ALLOWED_HOSTS = ["*"]
+
+# Security settings for production
+SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
 
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": (

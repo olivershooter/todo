@@ -1,20 +1,26 @@
+version: 1
 services:
-  frontend-todo:
-    build: ./frontend
+  django-backend:
+    image: ${DOCKER_REGISTRY}/django-backend:${VERSION}
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
     ports:
-      - "5175:80"
+      - 8000:8000
+    environment:
+      - SECRET_KEY=${DJANGO_SECRET_KEY}
+      - DB_NAME=${DB_NAME}
+      - DB_USER=${DB_USER}
+      - DB_PASS=${DB_PASS}
+      - DB_HOST=${DB_HOST}
+      - DB_PORT=${DB_PORT}
+
+  vite-frontend:
+    image: ${DOCKER_REGISTRY}/vite-frontend:${VERSION}
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - 80:80
     depends_on:
-      - backend-todo
-    networks:
-      - app-network
-
-  backend-todo:
-    build: ./backend
-    ports:
-      - "9223:8000"
-    networks:
-      - app-network
-
-networks:
-  app-network:
-    driver: bridge
+      - django-backend

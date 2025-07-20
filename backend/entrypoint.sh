@@ -1,16 +1,10 @@
-#!/bin/sh
+#!/bin/bash
 
-until cd /code
-do
-    echo "Waiting for server volume..."
-done
+# Apply database migrations
+python manage.py migrate
 
+# Collect static files
+python manage.py collectstatic --noinput
 
-until python manage.py migrate
-do
-    echo "Waiting for db to be ready..."
-    sleep 2
-done
-
-
-gunicorn --bind :8000 --workers 2 djproject.wsgi
+# Start Gunicorn server
+exec gunicorn backend.wsgi:application --bind 0.0.0.0:8000
