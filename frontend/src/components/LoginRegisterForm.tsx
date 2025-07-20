@@ -1,14 +1,20 @@
 import { useState } from "react";
-import api from "../api";
 import { useNavigate } from "@tanstack/react-router";
-import { ACCESS_TOKEN, REFRESH_TOKEN } from "../constants";
+import { ACCESS_TOKEN, REFRESH_TOKEN } from "../constants/api";
 import { FaUser, FaLock, FaSignInAlt, FaUserPlus } from "react-icons/fa";
 import { useAuth } from "../context/AuthContext";
 import { LoadingIndicator } from "./LoadingIndicator";
+import api from "../api/api";
+import toast from "react-hot-toast";
 
-export const LoginRegisterForm = ({ route, method }) => {
+export const LoginRegisterForm = ({
+  route,
+  method,
+}: {
+  route: string;
+  method: string;
+}) => {
   const [username, setUsername] = useState("");
-  console.log("username:", username);
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -16,26 +22,30 @@ export const LoginRegisterForm = ({ route, method }) => {
 
   const { setAuthenticated } = useAuth();
 
-  const handleSubmit = async (e) => {
-    setLoading(true);
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setLoading(true);
 
     try {
-      const res = await api.post(route, { username, password });
-
-      console.log("register: ", res);
+      const res = await api.post(
+        route,
+        { username, password },
+        { suppressSuccessToast: true },
+      );
 
       if (method === "login") {
         localStorage.setItem(ACCESS_TOKEN, res.data.access);
         localStorage.setItem(REFRESH_TOKEN, res.data.refresh);
         setAuthenticated(true);
+        toast.success("Logged in");
         navigate({ to: "/" });
       } else {
         // On registration
+        toast.success("Successfully created an account");
         navigate({ to: "/login" });
       }
     } catch (error) {
-      alert(error);
+      toast.error("Failed");
     } finally {
       setLoading(false);
     }
